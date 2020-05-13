@@ -1,5 +1,5 @@
 # Git Help
-A repository to hold a constantly evolving  `reveal.js` presentation that makes use of a `node.js`-based server with `node-pty` as backend and `xterm.js` as frontend for a terminal used in the interactive demonstrations.
+This repository hosts an evolving `reveal.js` presentation about using Git that makes use of a `node.js`-based server with `node-pty` as backend and `xterm.js` as frontend for a terminal used in the interactive demonstrations.
 
 ## Acknowledgements
 
