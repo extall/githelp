@@ -64,6 +64,7 @@ var getDesiredDir = function(req) {
 };
 
 var changeDir = function(req) {
+
     var dir = getDesiredDir(req);
 
     if (currentDir !== dir) {
@@ -71,7 +72,7 @@ var changeDir = function(req) {
         currentDir = dir;
     }
 
-    terminal.write(process.platform === 'win32' ? `cls\r` : `clear\r`);
+    //terminal.write(process.platform === 'win32' ? `cls\r` : `clear\r`);
 };
 
 app.post('/terminal', function(req, res) {

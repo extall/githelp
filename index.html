@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Git Help</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -12,7 +12,14 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
-		
+
+		<!-- Specific style changes -->
+		<style>
+			.reveal p.left {
+				text-align: left;
+			}
+		</style>
+
 		<!-- The terminal styles -->
 		<link rel="stylesheet" href="node_modules/xterm/dist/xterm.css" />
 		
@@ -34,13 +41,43 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
+
+				<section>
+					<h3 style="margin-top:2em;">Git Help: A Concise Introduction with Live Examples</h3>
+					<h4 style="margin-top:1.25em;">Dr. Aleksei Tepljakov</h4>
+					<p style="margin-top: -0.5em; font-size: 0.7em; color: #ccc; text-shadow: 1px 1px #000;">Head of Re:creation VR&AR Laboratory, Centre for Intelligent Systems<br />Department of Computer Systems, Tallinn University of Technology, Estonia</p>
+				</section>
+
+				<section style="font-size: 0.85em;">
+					<h3>Acknowledgements</h3>
+					<p class="left">This interactive presentation is largely based on the materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software Engineering course</a> read in University of Washington by René Just as well as the official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</p>
+					<p class="left">The development of this presentation was partially supported by a teaching grant awarded to Aleksei Tepljakov in 2019.</p>
+				</section>
+
+				<section style="font-size: 0.8em">
+					<h3>Prerequisites</h3>
+					<p class="left">Required:</p>
+					<ol style="display: block;">
+						<li>Download and install Git from <a href="https://git-scm.com/">https://git-scm.com/</a></li>
+						<li>Register an account at GitHub: <a href="https://github.com/">https://github.com/</a></li>
+					</ol>
+					<p class="left">Optional:</p>
+					<ol style="display: block">
+						<li><a href="https://sourcegear.com/diffmerge/">https://sourcegear.com/diffmerge/</a> (you will need a merge tool)</li>
+						<li><a href="http://gitextensions.github.io/">http://gitextensions.github.io/</a> (graphical user interface for Git)</li>
+					</ol>
+				</section>
 				<section>Slide 2</section>
 				
 				<section data-state="terminal-01">
                     <h5>Let's clone a repository!</h5>
                     <div data-is-terminal data-dir="~"></div>
                 </section>
+
+				<section data-state="terminal-02">
+					<h5>Another terminal! Will it work</h5>
+					<div data-is-terminal data-dir="~"></div>
+				</section>
 				
 			</div>
 		</div>
