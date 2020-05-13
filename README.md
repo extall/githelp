@@ -17,6 +17,8 @@ Then, run the backend server using
 
 `npm start`
 
-## Varia
+After this, navigate to `localhost:8000` in your browser of choice.
+
+## Notes
 
 Only tested on Windows at the moment.
