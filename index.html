@@ -13,10 +13,40 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
 
-		<!-- Specific style changes -->
+		<!-- Specific style changes and updates -->
 		<style>
+
+			/* Left align paragraphs */
 			.reveal p.left {
 				text-align: left;
+			}
+
+			/* Code background */
+			.reveal code {
+				background: #1a53a1;
+			}
+
+			/* Two column format */
+			.reveal .container{
+				display: flex;
+			}
+
+			.reveal .container .col{
+				flex: 1;
+			}
+
+		</style>
+
+		<style>
+			/* Also use prefixes with @keyframes and animation to support current browsers */
+			@keyframes blinker {
+				from {background-color: #1a53a1; color: white}
+				50% {background-color: #191919; color: #fff}
+			}
+			.flash-01 {
+				animation: blinker steps(1,end) 500ms infinite alternate;
+				padding-left: 0.2em !important;
+				padding-right: 0.2em !important;
 			}
 		</style>
 
@@ -44,31 +74,82 @@
 
 				<section>
 					<h3 style="margin-top:2em;">Git Help: A Concise Introduction with Live Examples</h3>
-					<h4 style="margin-top:1.25em;">Dr. Aleksei Tepljakov</h4>
+					<h4 style="margin-top:1.25em;">Aleksei Tepljakov</h4>
 					<p style="margin-top: -0.5em; font-size: 0.7em; color: #ccc; text-shadow: 1px 1px #000;">Head of Re:creation VR&AR Laboratory, Centre for Intelligent Systems<br />Department of Computer Systems, Tallinn University of Technology, Estonia</p>
 				</section>
 
-				<section style="font-size: 0.85em;">
-					<h3>Acknowledgements</h3>
-					<p class="left">This interactive presentation is largely based on the materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software Engineering course</a> read in University of Washington by René Just as well as the official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</p>
-					<p class="left">The development of this presentation was partially supported by a teaching grant awarded to Aleksei Tepljakov in 2019.</p>
+				<section>
+					<p class="left">Welcome to the interactive lecture which introduces you to one of the industry-standard tools for version control—<span class="flash-01">Git</span>!</p>
+					<p class="left">To follow the lecture, navigate the slides either using arrows on your keyboard, or clicking the arrows in the bottom right corner of the screen.</p>
 				</section>
 
-				<section style="font-size: 0.8em">
-					<h3>Prerequisites</h3>
-					<p class="left">Required:</p>
-					<ol style="display: block;">
-						<li>Download and install Git from <a href="https://git-scm.com/">https://git-scm.com/</a></li>
-						<li>Register an account at GitHub: <a href="https://github.com/">https://github.com/</a></li>
-					</ol>
-					<p class="left">Optional:</p>
-					<ol style="display: block">
-						<li><a href="https://sourcegear.com/diffmerge/">https://sourcegear.com/diffmerge/</a> (you will need a merge tool)</li>
-						<li><a href="http://gitextensions.github.io/">http://gitextensions.github.io/</a> (graphical user interface for Git)</li>
-					</ol>
+				<section style="font-size:0.9em">
+					<h3>Outline</h3>
+					<ul>
+						<li>Prerequisites and setup</li>
+						<li>Version control: motivation and background</li>
+						<li>Brief history of Git</li>
+						<li>Setting up a Git identity</li>
+						<li>Cloning a repository</li>
+						<li>The Git versioning pipeline</li>
+						<li>Committing changes, pushing and pulling</li>
+						<li>Using branches</li>
+						<li>Conclusions and what's next</li>
+					</ul>
 				</section>
-				<section>Slide 2</section>
-				
+
+				<section>
+					<h3>Prerequisites and necessary setup</h3>
+				</section>
+
+				<section>
+					<section style="font-size: 0.72em">
+						<h3>Prerequisites</h3>
+						<p class="left" style="font-weight: bold">Required:</p>
+						<ol style="display: block;">
+							<li>Download and install Git from <a href="https://git-scm.com/">https://git-scm.com/</a></li>
+							<li>Register an account at GitHub: <a href="https://github.com/">https://github.com/</a></li>
+						</ol>
+						<p class="left">After registering your account at Overleaf, please let your instructor know your account email so that the instructor could set you up with write access to a certain repository that we will be using in this interactive session.</p>
+						<p class="left" style="font-weight: bold">Optional:</p>
+						<ol style="display: block">
+							<li><a href="https://sourcegear.com/diffmerge/">https://sourcegear.com/diffmerge/</a> (you will need a merge tool)</li>
+							<li><a href="http://gitextensions.github.io/">http://gitextensions.github.io/</a> (graphical user interface for Git)</li>
+						</ol>
+					</section>
+
+					<section style="font-size:0.7em;">
+						<h3>How to use this interactive lecture</h3>
+						<p class="left">If you want to use the interactive lecture yourself, the set up involves the following steps:</p>
+						<ol>
+							<li>Download and install the latest LTS version of Node.js from <a href="https://nodejs.org/en/">https://nodejs.org/en/</a>. When installing it, be sure to download and configure the build tools during the final step (there will be a checkbox asking whether you would like to do that).</li>
+							<li>Download the repository with the lecture from GitHub: <a href="https://github.com/extall/githelp">https://github.com/extall/githelp</a> (first click the green button that says <strong>clone or download</strong>, then choose <strong>download ZIP</strong>)</li>
+							<li>In the directory that contains the file <code>server.js</code> run <code>npm install</code> and then <code>npm start</code> in your terminal. Open <code>localhost:8000</code> in your browser.</li>
+						</ol>
+					</section>
+
+
+				</section>
+
+				<section>
+					<h3>Test two column</h3>
+					<div class="container">
+						<div class="col">
+							<p class="left">
+								Text text text <br />
+								text text
+							</p>
+
+						</div>
+						<div class="col">
+							<p class="left">
+								More more more <br />
+								text text
+							</p>
+						</div>
+					</div>
+				</section>
+
 				<section data-state="terminal-01">
                     <h5>Let's clone a repository!</h5>
                     <div data-is-terminal data-dir="~"></div>
@@ -77,6 +158,16 @@
 				<section data-state="terminal-02">
 					<h5>Another terminal! Will it work</h5>
 					<div data-is-terminal data-dir="~"></div>
+				</section>
+
+				<section style="font-size: 0.85em;">
+					<h3>Acknowledgements</h3>
+					<p class="left">This interactive presentation is largely based on the materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software Engineering course</a> read in University of Washington by René Just as well as the official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</p>
+					<p class="left">The development of this presentation was partially supported by a teaching grant awarded to Aleksei Tepljakov in 2019.</p>
+				</section>
+
+				<section>
+					<h3>Thank you for your attention!</h3>
 				</section>
 				
 			</div>
