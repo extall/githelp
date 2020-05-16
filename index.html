@@ -29,10 +29,19 @@
 			/* Two column format */
 			.reveal .container{
 				display: flex;
+				margin-top: 1em;
 			}
 
 			.reveal .container .col{
 				flex: 1;
+			}
+
+			/* Git */
+			.reveal img.git {
+				background: none;
+				position: absolute;
+				right: 0px;
+				bottom: 0px;
 			}
 
 		</style>
@@ -40,11 +49,34 @@
 		<style>
 			/* Also use prefixes with @keyframes and animation to support current browsers */
 			@keyframes blinker {
-				from {background-color: #1a53a1; color: white}
+				from {background-color: #1a53a1; color: #fff}
 				50% {background-color: #191919; color: #fff}
 			}
+
+			@keyframes blinker-bad{
+				from {background-color: #EB132C; color: #fff;}
+				50% {background-color: #191919; color: #fff;}
+			}
+
+			@keyframes blinker-good{
+				from {background-color: #25A403; color: #fff;}
+				50% {background-color: #191919; color: #fff;}
+			}
+
 			.flash-01 {
 				animation: blinker steps(1,end) 500ms infinite alternate;
+				padding-left: 0.2em !important;
+				padding-right: 0.2em !important;
+			}
+
+			.flash-bad {
+				animation: blinker-bad steps(1,end) 500ms infinite alternate;
+				padding-left: 0.2em !important;
+				padding-right: 0.2em !important;
+			}
+
+			.flash-good {
+				animation: blinker-good steps(1,end) 500ms infinite alternate;
 				padding-left: 0.2em !important;
 				padding-right: 0.2em !important;
 			}
@@ -88,18 +120,16 @@
 					<ul>
 						<li>Prerequisites and setup</li>
 						<li>Version control: motivation and background</li>
-						<li>Brief history of Git</li>
-						<li>Setting up a Git identity</li>
-						<li>Cloning a repository</li>
-						<li>The Git versioning pipeline</li>
+						<li>Git Basics</li>
+						<li>The Git versioning process</li>
 						<li>Committing changes, pushing and pulling</li>
-						<li>Using branches</li>
+						<li>About branches and merging</li>
 						<li>Conclusions and what's next</li>
 					</ul>
 				</section>
 
 				<section>
-					<h3>Prerequisites and necessary setup</h3>
+					<h3>Prerequisites and setup</h3>
 				</section>
 
 				<section>
@@ -110,7 +140,7 @@
 							<li>Download and install Git from <a href="https://git-scm.com/">https://git-scm.com/</a></li>
 							<li>Register an account at GitHub: <a href="https://github.com/">https://github.com/</a></li>
 						</ol>
-						<p class="left">After registering your account at Overleaf, please let your instructor know your account email so that the instructor could set you up with write access to a certain repository that we will be using in this interactive session.</p>
+						<p class="left">After registering your account at GitHub, please let your instructor know your account email so that the instructor could set you up with write access to a certain repository that we will be using in this interactive session.</p>
 						<p class="left" style="font-weight: bold">Optional:</p>
 						<ol style="display: block">
 							<li><a href="https://sourcegear.com/diffmerge/">https://sourcegear.com/diffmerge/</a> (you will need a merge tool)</li>
@@ -132,23 +162,119 @@
 				</section>
 
 				<section>
-					<h3>Test two column</h3>
-					<div class="container">
-						<div class="col">
-							<p class="left">
-								Text text text <br />
-								text text
-							</p>
-
-						</div>
-						<div class="col">
-							<p class="left">
-								More more more <br />
-								text text
-							</p>
-						</div>
-					</div>
+					<h3>Version control:<br />motivation and background</h3>
 				</section>
+
+				<section>
+					<section data-transition="zoom">
+						<h4>Perhaps you are familiar with this situation...</h4>
+					</section>
+
+					<section data-transition="zoom">
+						<img class="plain" alt="Many copies" src="img/ms_word_BAD.png" />
+					</section>
+
+					<section data-transition="zoom">
+						<h4>... or maybe this one?</h4>
+					</section>
+
+					<section data-transition="zoom">
+						<img class="plain" alt="Many copies" src="img/myapp_BAD.png" />
+					</section>
+
+					<section>
+						<h3>Why this is <span class="flash-bad">not coherent</span></h3>
+						<ul>
+							<li>Which version is which?</li>
+							<li>Creates a mess in the file system and in your head.</li>
+							<li>Even though contemporary cloud storage services keep a history of file changes, no automatic system can ever be completely reliable.</li>
+							<li style="color: #888;">(Also, almost no one should use MS Word for professional writing, but that is a different story.)</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3><span class="flash-good">Coherent</span>: use Version Control</h3>
+						<ul>
+							<li>Offers a complete solution for managing file changes over time.</li>
+							<li>All file types are supported; can handle documents and complex coding projects alike.</li>
+							<li>Almost any change is completely reversible.</li>
+							<li>Makes possible efficient collaboration on projects.</li>
+							<li>Can work as a backup solution, too.</li>
+						</ul>
+					</section>
+
+					<section style="font-size: 0.85em" data-transition="slide-in fade-out">
+						<h3>Centralized version control</h3>
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>One central repository.</li>
+									<li>All users commit changes to the central repository.</li>
+									<li>Each user has a working copy. The repository gets updated when they commit.</li>
+									<li>Examples: Subversion (SVN), CVS, Helix Core (Perforce).</li>
+								</ul>
+
+							</div>
+							<div class="col">
+								<img class="plain" src="img/vcs_centralized.svg">
+							</div>
+						</div>
+					</section>
+
+					<section style="font-size: 0.8em" data-transition="fade-in">
+						<h3>Decentralized version control</h3>
+						<div class="container">
+							<div class="col">
+								<ul>
+									<li>Multiple clones of a repository.</li>
+									<li>All users commit changes to a private repository.</li>
+									<li>All changes remain local until pushed to another repository.</li>
+									<li>No external changes are visible unless pulled from elsewhere.</li>
+									<li>An example of a decentralized version control system is...</li>
+								</ul>
+
+							</div>
+							<div class="col">
+								<img class="plain" src="img/vcs_decentralized.svg">
+							</div>
+						</div>
+					</section>
+
+				</section>
+
+				<section>
+					<h3>Git</h3>
+				</section>
+
+				<section>
+
+					<section style="font-size: 0.85em;">
+						<h3>Git facts</h3>
+						<ul style="margin-top: 25px;">
+							<li>Git was created by Linus Torvalds in 2005.</li>
+							<li>It was designed to do version control on Linux kernel.</li>
+							<li>Goals of Git are speed, support for nonlinear development, and ability to handle large projects efficiently.</li>
+							<li>Compared to Subversion, for example...</li>
+						</ul>
+
+						<div style="background: url('img/git.png'); position: relative; float: right; width:200px; height: 200px;"></div>
+						<p class="left" style="margin-top:50px;">“Hello, my name is Linus Torvalds and I pronounce <strong>svn</strong> as <strong>git</strong>.” <span style="color: #888;">(not an actual quote)</span></p>
+
+					</section>
+
+					<section style="font-size: 0.8em;" data-transition="slide-in fade-out">
+						<h3>Subversion timeline</h3>
+						<img class="plain" src="img/checkins_svn.svg">
+					</section>
+
+					<section style="font-size: 0.8em;" data-transition="fade-in slide-out">
+						<h3>Git timeline</h3>
+						<img class="plain" src="img/checkins_git.svg">
+					</section>
+
+				</section>
+
+
 
 				<section data-state="terminal-01">
                     <h5>Let's clone a repository!</h5>
