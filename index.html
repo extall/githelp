@@ -253,13 +253,25 @@
 						<ul style="margin-top: 25px;">
 							<li>Git was created by Linus Torvalds in 2005.</li>
 							<li>It was designed to do version control on Linux kernel.</li>
+							<li>It is free, open source software.</li>
 							<li>Goals of Git are speed, support for nonlinear development, and ability to handle large projects efficiently.</li>
-							<li>Compared to Subversion, for example...</li>
 						</ul>
 
 						<div style="background: url('img/git.png'); position: relative; float: right; width:200px; height: 200px;"></div>
 						<p class="left" style="margin-top:50px;">“Hello, my name is Linus Torvalds and I pronounce <strong>svn</strong> as <strong>git</strong>.” <span style="color: #888;">(not an actual quote)</span></p>
 
+					</section>
+
+					<section style="font-size: 0.85em;">
+						<h3>Subversion versus Git</h3>
+						<p class="left">Subversion tracks version data on each individual file.</p>
+						<p class="left">Git, on the other hand, keeps “snapshots” of the entire state of the project:</p>
+						<ul>
+							<li>Each checkin version of the code has a copy of each file in it.</li>
+							<li>Some files change on the given checkin, some do not.</li>
+							<li>For files that do not change, Git does not store them again, the new snapshot just contains links to previous files.</li>
+							<li>This redundant mechanism improves the speed of operation.</li>
+						</ul>
 					</section>
 
 					<section style="font-size: 0.8em;" data-transition="slide-in fade-out">
@@ -274,12 +286,33 @@
 
 				</section>
 
+				<section>
+					<h3>Let's get our feet wet!</h3>
+				</section>
 
+				<section>
 
-				<section data-state="terminal-01">
-                    <h5>Let's clone a repository!</h5>
-                    <div data-is-terminal data-dir="~"></div>
-                </section>
+					<section style="font-size: 0.7em;">
+						<h3>Identity: who is going to commit?</h3>
+						<p class="left">After firing up the terminal (or Git bash on Windows), assuming this is your first “Git session”, you need to provide Git your identity. Otherwise, you will not be allowed to commit.</p>
+						<p class="left">To do this, run the following two lines in the terminal replacing relevant parts with your details:</p>
+						<pre><code class="hljs" style="font-size: 1.5em; padding: 20px;">git config --global user.name "Your Name"
+
+git config --global user.email "example@example.com"</code></pre>
+
+						<p class="left">To use a separate identity in each project, just omit the <code>--global</code> option when your current directory is inside the relevant repository.</p>
+
+						<p class="left">You can also check your identity by omitting the strings at the end.</p>
+
+					</section>
+
+					<section data-state="terminal-01">
+						<h5>Set up the identity</h5>
+						<div data-is-terminal data-dir="~"></div>
+					</section>
+
+				</section>
+
 
 				<section data-state="terminal-02">
 					<h5>Another terminal! Will it work</h5>
@@ -288,7 +321,11 @@
 
 				<section style="font-size: 0.85em;">
 					<h3>Acknowledgements</h3>
-					<p class="left">This interactive presentation is largely based on the materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software Engineering course</a> read in University of Washington by René Just as well as the official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</p>
+					<p class="left">This interactive presentation is based on</p>
+					<ul>
+						<li>The materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software Engineering course</a> read in University of Washington by René Just</li>
+						<li>The official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</li>
+					</ul>
 					<p class="left">The development of this presentation was partially supported by a teaching grant awarded to Aleksei Tepljakov in 2019.</p>
 				</section>
 
@@ -299,7 +336,7 @@
 			</div>
 		</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script> -->
 		<script src="js/reveal.js"></script>
 
 		<script defe="true">
