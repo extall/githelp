@@ -396,11 +396,10 @@ git config --global user.email "example@example.com"</code></pre>
                 <h3>Congratulations!</h3>
                 <p class="left">If everything completed successfully, then you have just cloned your first Git
                     repository.</p>
-                <p class="left">Now <code>cd</code> into its folder and type <code class="hljs git">git status</code> to
-                    check
-                    the status of the working tree.</p>
-                <p class="left">Before proceeding, we now need to learn a few things about Git terminology and the way
-                    Git versioning process works.</p>
+                <p class="left">Now <code>cd</code> into its folder and type</p>
+                <pre class="bash"><code class="hljs git">git status</code></pre>
+                <p class="left">to check the status of the working tree.</p>
+                <p class="left">Before proceeding, we now need to learn a few things about Git terminology and the way Git versioning process works.</p>
             </section>
         </section>
 
@@ -480,9 +479,7 @@ git config --global user.email "example@example.com"</code></pre>
                     <li>Modify files in your working directory;</li>
                     <li>Stage files which you want to commit;</li>
                     <li>Commit changes, i.e., create a new snapshot of your repo;</li>
-                    <li>Push the changes to remote; if you are collaborator, but not owner of the remote, a pull request
-                        (PR) is created.
-                    </li>
+                    <li>Push the changes to remote (assuming existence of the corresponding access rights).</li>
                 </ul>
 
             </section>
@@ -504,8 +501,7 @@ git config --global user.email "example@example.com"</code></pre>
             <section style="font-size:0.7em">
                 <h3>Git create and/or modify a file</h3>
                 <p class="left">Let us create a folder, and in it a file. We then add the file to the repository and
-                    commit. Run the following code (Windows) replacing <code>YEAR</code>, <code>MONTH</code>, and <code>DAY</code>
-                    as needed:</p>
+                    commit. Run the following code (Windows) replacing <code>YEAR</code>, <code>MONTH</code>, and <code>DAY</code> as needed:</p>
                 <pre class="bash"><code class="hljs git">md pg_YEAR_MONTH_DAY
 
 cd pg_YEAR_MONTH_DAY
@@ -532,15 +528,29 @@ echo Hello, World! > new_file.txt</code></pre>
                 </ul>
             </section>
 
+            <section style="font-size:0.7em;">
+                <h3>Pushing the file to the origin</h3>
+                <p class="left">The <strong>origin</strong> is what in case of Git plays the role of a central repository (think <a href="https://github.com">GitHub.com</a> or <a href="https://bitbucket.org/">BitBucket.org</a>). After committing your work to the local repo you often want to update the origin as well.</p>
+                <p class="left">Therefore, if you have been assigned as collaborator to the <strong>helpgit</strong> repository, you can now do</p>
+                <pre class="bash"><code class="hljs git">git push</code></pre>
+                <p class="left">Your changes are then synchronized with the origin and others can pull them from it using, e.g., shorthand for <code>git fetch</code> and <code>git merge</code>:</p>
+                <pre class="bash"><code class="hljs git">git pull</code></pre>
+            </section>
+
         </section>
 
-        <section>
-            <h3>TODO</h3>
-            <p class="left">
-                - You can add files using wildcards. E.g.: git add * or git add *.cpp *.h
-                - the repo folder can be freely moved around the filesystem
-                - the repo folder contains a hidden .git folder. the user need not ever touch it!
-            </p>
+        <section style="font-size: 0.8em;">
+            <h3>More about Git</h3>
+            <p class="left">By this time you should have learned the most simple Git workflow. Here are some useful bits of information.</p>
+            <ul>
+                <li>You can add files faster using wildcards. For example, to add all files use <code>git add *</code> and to add all text files <code>git add *.txt</code></li>
+                <li>The repo folder can be <span class="flash-good">freely moved</span> around the filesystem.</li>
+                <li>The repo root contains a hidden <code>.git</code> folder. <span class="flash-bad">DON'T TOUCH IT</span>.</li>
+                <li>Git keeps track of and commit objects by creating SHA-1 hashes.</li>
+                <li>You can access various commits using <code>git checkout HASH</code>.</li>
+            </ul>
+
+            <p class="left">Next, we will discuss <strong>merge conflicts</strong> and <strong>branches</strong>.</p>
         </section>
 
         <section style="font-size: 0.85em;">
