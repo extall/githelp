@@ -1,368 +1,596 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Git Help</title>
+    <title>Git Help</title>
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
 
-		<!-- Specific style changes and updates -->
-		<style>
+    <!-- Specific style changes and updates -->
+    <style>
 
-			/* Left align paragraphs */
-			.reveal p.left {
-				text-align: left;
-			}
+        /* Left align paragraphs */
+        .reveal p.left {
+            text-align: left;
+        }
 
-			/* Code background */
-			.reveal code {
-				background: #1a53a1;
-			}
+        /* Code background */
+        .reveal code {
+            background: #1a53a1;
+            padding-left: 0.2em;
+            padding-right: 0.2em;
+        }
 
-			/* Two column format */
-			.reveal .container{
-				display: flex;
-				margin-top: 1em;
-			}
+        /* Two column format */
+        .reveal .container {
+            display: flex;
+            margin-top: 1em;
+        }
 
-			.reveal .container .col{
-				flex: 1;
-			}
+        .reveal .container .col {
+            flex: 1;
+        }
 
-			/* Git */
-			.reveal img.git {
-				background: none;
-				position: absolute;
-				right: 0px;
-				bottom: 0px;
-			}
+        /* Git code formatting */
+        .reveal pre code.git {
+            font-size: 1.5em;
+            padding: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
 
-		</style>
+        .reveal code.git {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
 
-		<style>
-			/* Also use prefixes with @keyframes and animation to support current browsers */
-			@keyframes blinker {
-				from {background-color: #1a53a1; color: #fff}
-				50% {background-color: #191919; color: #fff}
-			}
+    </style>
 
-			@keyframes blinker-bad{
-				from {background-color: #EB132C; color: #fff;}
-				50% {background-color: #191919; color: #fff;}
-			}
+    <style>
+        /* Also use prefixes with @keyframes and animation to support current browsers */
+        @keyframes blinker {
+            from {
+                background-color: #1a53a1;
+                color: #fff
+            }
+            50% {
+                background-color: #191919;
+                color: #fff
+            }
+        }
 
-			@keyframes blinker-good{
-				from {background-color: #25A403; color: #fff;}
-				50% {background-color: #191919; color: #fff;}
-			}
+        @keyframes blinker-bad {
+            from {
+                background-color: #EB132C;
+                color: #fff;
+            }
+            50% {
+                background-color: #191919;
+                color: #fff;
+            }
+        }
 
-			.flash-01 {
-				animation: blinker steps(1,end) 500ms infinite alternate;
-				padding-left: 0.2em !important;
-				padding-right: 0.2em !important;
-			}
+        @keyframes blinker-good {
+            from {
+                background-color: #25A403;
+                color: #fff;
+            }
+            50% {
+                background-color: #191919;
+                color: #fff;
+            }
+        }
 
-			.flash-bad {
-				animation: blinker-bad steps(1,end) 500ms infinite alternate;
-				padding-left: 0.2em !important;
-				padding-right: 0.2em !important;
-			}
+        .flash-01 {
+            animation: blinker steps(1, end) 500ms infinite alternate;
+            padding-left: 0.2em !important;
+            padding-right: 0.2em !important;
+        }
 
-			.flash-good {
-				animation: blinker-good steps(1,end) 500ms infinite alternate;
-				padding-left: 0.2em !important;
-				padding-right: 0.2em !important;
-			}
-		</style>
+        .flash-bad {
+            animation: blinker-bad steps(1, end) 500ms infinite alternate;
+            padding-left: 0.2em !important;
+            padding-right: 0.2em !important;
+        }
 
-		<!-- The terminal styles -->
-		<link rel="stylesheet" href="node_modules/xterm/dist/xterm.css" />
-		
-		<script type="module">
+        .flash-good {
+            animation: blinker-good steps(1, end) 500ms infinite alternate;
+            padding-left: 0.2em !important;
+            padding-right: 0.2em !important;
+        }
+    </style>
+
+    <!-- The terminal styles -->
+    <link rel="stylesheet" href="node_modules/xterm/dist/xterm.css"/>
+
+    <script type="module">
         // Import Xterm reqs.
         import * as attach from './node_modules/xterm/dist/addons/attach/attach.js';
         import * as fit from './node_modules/xterm/dist/addons/fit/fit.js';
-		</script>
+    </script>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
 
-				<section>
-					<h3 style="margin-top:2em;">Git Help: A Concise Introduction with Live Examples</h3>
-					<h4 style="margin-top:1.25em;">Aleksei Tepljakov</h4>
-					<p style="margin-top: -0.5em; font-size: 0.7em; color: #ccc; text-shadow: 1px 1px #000;">Head of Re:creation VR&AR Laboratory, Centre for Intelligent Systems<br />Department of Computer Systems, Tallinn University of Technology, Estonia</p>
-				</section>
+        <section>
+            <h3 style="margin-top:2em;">Git Help: A Concise Introduction with Live Examples</h3>
+            <h4 style="margin-top:1.25em;">Aleksei Tepljakov</h4>
+            <p style="margin-top: -0.5em; font-size: 0.7em; color: #ccc; text-shadow: 1px 1px #000;">Head of Re:creation
+                XR Laboratory, Centre for Intelligent Systems<br/>Department of Computer Systems, Tallinn University of
+                Technology, Estonia</p>
+        </section>
 
-				<section>
-					<p class="left">Welcome to the interactive lecture which introduces you to one of the industry-standard tools for version control—<span class="flash-01">Git</span>!</p>
-					<p class="left">To follow the lecture, navigate the slides either using arrows on your keyboard, or clicking the arrows in the bottom right corner of the screen.</p>
-				</section>
+        <section>
+            <p class="left">Welcome to the interactive lecture which introduces you to one of the industry-standard
+                tools for version control—<span class="flash-01">Git</span>!</p>
+            <p class="left">To follow the lecture, navigate the slides either using arrows on your keyboard, or clicking
+                the arrows in the bottom right corner of the screen.</p>
+        </section>
 
-				<section style="font-size:0.9em">
-					<h3>Outline</h3>
-					<ul>
-						<li>Prerequisites and setup</li>
-						<li>Version control: motivation and background</li>
-						<li>Git Basics</li>
-						<li>The Git versioning process</li>
-						<li>Committing changes, pushing and pulling</li>
-						<li>About branches and merging</li>
-						<li>Conclusions and what's next</li>
-					</ul>
-				</section>
+        <section style="font-size:0.9em">
+            <h3>Outline</h3>
+            <ul>
+                <li>Prerequisites and setup</li>
+                <li>Version control: motivation and background</li>
+                <li>Git Basics</li>
+                <li>The Git versioning process</li>
+                <li>Committing changes, pushing and pulling</li>
+                <li>About branches and merging</li>
+                <li>Conclusions and what's next</li>
+            </ul>
+        </section>
 
-				<section>
-					<h3>Prerequisites and setup</h3>
-				</section>
+        <section>
+            <h3>Prerequisites and setup</h3>
+        </section>
 
-				<section>
-					<section style="font-size: 0.72em">
-						<h3>Prerequisites</h3>
-						<p class="left" style="font-weight: bold">Required:</p>
-						<ol style="display: block;">
-							<li>Download and install Git from <a href="https://git-scm.com/">https://git-scm.com/</a></li>
-							<li>Register an account at GitHub: <a href="https://github.com/">https://github.com/</a></li>
-						</ol>
-						<p class="left">After registering your account at GitHub, please let your instructor know your account email so that the instructor could set you up with write access to a certain repository that we will be using in this interactive session.</p>
-						<p class="left" style="font-weight: bold">Optional:</p>
-						<ol style="display: block">
-							<li><a href="https://sourcegear.com/diffmerge/">https://sourcegear.com/diffmerge/</a> (you will need a merge tool)</li>
-							<li><a href="http://gitextensions.github.io/">http://gitextensions.github.io/</a> (graphical user interface for Git)</li>
-						</ol>
-					</section>
+        <section>
+            <section style="font-size: 0.72em">
+                <h3>Prerequisites</h3>
+                <p class="left" style="font-weight: bold">Required:</p>
+                <ol style="display: block;">
+                    <li>Download and install Git from <a href="https://git-scm.com/">https://git-scm.com/</a></li>
+                    <li>Register an account at GitHub: <a href="https://github.com/">https://github.com/</a></li>
+                </ol>
+                <p class="left">After registering your account at GitHub, please let your instructor know your account
+                    email so that the instructor could set you up with write access to a certain repository that we will
+                    be using in this interactive session.</p>
+                <p class="left" style="font-weight: bold">Optional:</p>
+                <ol style="display: block">
+                    <li><a href="https://sourcegear.com/diffmerge/">https://sourcegear.com/diffmerge/</a> (you will need
+                        a merge tool)
+                    </li>
+                    <li><a href="http://gitextensions.github.io/">http://gitextensions.github.io/</a> (graphical user
+                        interface for Git)
+                    </li>
+                </ol>
+            </section>
 
-					<section style="font-size:0.7em;">
-						<h3>How to use this interactive lecture</h3>
-						<p class="left">If you want to use the interactive lecture yourself, the set up involves the following steps:</p>
-						<ol>
-							<li>Download and install the latest LTS version of Node.js from <a href="https://nodejs.org/en/">https://nodejs.org/en/</a>. When installing it, be sure to download and configure the build tools during the final step (there will be a checkbox asking whether you would like to do that).</li>
-							<li>Download the repository with the lecture from GitHub: <a href="https://github.com/extall/githelp">https://github.com/extall/githelp</a> (first click the green button that says <strong>clone or download</strong>, then choose <strong>download ZIP</strong>)</li>
-							<li>In the directory that contains the file <code>server.js</code> run <code>npm install</code> and then <code>npm start</code> in your terminal. Open <code>localhost:8000</code> in your browser.</li>
-						</ol>
-					</section>
+            <section style="font-size:0.7em;">
+                <h3>How to use this interactive lecture</h3>
+                <p class="left">If you want to use the interactive lecture yourself, the set up involves the following
+                    steps:</p>
+                <ol>
+                    <li>Download and install the latest LTS version of Node.js from <a href="https://nodejs.org/en/">https://nodejs.org/en/</a>.
+                        When installing it, be sure to download and configure the build tools during the final step
+                        (there will be a checkbox asking whether you would like to do that).
+                    </li>
+                    <li>Download the repository with the lecture from GitHub: <a
+                            href="https://github.com/extall/githelp">https://github.com/extall/githelp</a> (first click
+                        the green button that says <strong>clone or download</strong>, then choose <strong>download
+                            ZIP</strong>)
+                    </li>
+                    <li>In the directory that contains the file <code>server.js</code> run <code>npm install</code> and
+                        then <code>npm start</code> in your terminal. Open <code>localhost:8000</code> in your browser.
+                    </li>
+                </ol>
+            </section>
 
 
-				</section>
+        </section>
 
-				<section>
-					<h3>Version control:<br />motivation and background</h3>
-				</section>
+        <section>
+            <h3>Version control:<br/>motivation and background</h3>
+        </section>
 
-				<section>
-					<section data-transition="zoom">
-						<h4>Perhaps you are familiar with this situation...</h4>
-					</section>
+        <section>
+            <section data-transition="zoom">
+                <h4>Perhaps you are familiar with this situation...</h4>
+            </section>
 
-					<section data-transition="zoom">
-						<img class="plain" alt="Many copies" src="img/ms_word_BAD.png" />
-					</section>
+            <section data-transition="zoom">
+                <img class="plain" alt="Many copies" src="img/ms_word_BAD.png"/>
+            </section>
 
-					<section data-transition="zoom">
-						<h4>... or maybe this one?</h4>
-					</section>
+            <section data-transition="zoom">
+                <h4>... or maybe this one?</h4>
+            </section>
 
-					<section data-transition="zoom">
-						<img class="plain" alt="Many copies" src="img/myapp_BAD.png" />
-					</section>
+            <section data-transition="zoom">
+                <img class="plain" alt="Many copies" src="img/myapp_BAD.png"/>
+            </section>
 
-					<section>
-						<h3>Why this is <span class="flash-bad">not coherent</span></h3>
-						<ul>
-							<li>Which version is which?</li>
-							<li>Creates a mess in the file system and in your head.</li>
-							<li>Even though contemporary cloud storage services keep a history of file changes, no automatic system can ever be completely reliable.</li>
-							<li style="color: #888;">(Also, almost no one should use MS Word for professional writing, but that is a different story.)</li>
-						</ul>
-					</section>
+            <section>
+                <h3>Why this is <span class="flash-bad">not coherent</span></h3>
+                <ul>
+                    <li>Which version is which?</li>
+                    <li>Creates a mess in the file system and in your head.</li>
+                    <li>Even though contemporary cloud storage services keep a history of file changes, no automatic
+                        system can ever be completely reliable.
+                    </li>
+                    <li style="color: #888;">(Also, almost no one should use MS Word for professional writing, but that
+                        is a different story.)
+                    </li>
+                </ul>
+            </section>
 
-					<section>
-						<h3><span class="flash-good">Coherent</span>: use Version Control</h3>
-						<ul>
-							<li>Offers a complete solution for managing file changes over time.</li>
-							<li>All file types are supported; can handle documents and complex coding projects alike.</li>
-							<li>Almost any change is completely reversible.</li>
-							<li>Makes possible efficient collaboration on projects.</li>
-							<li>Can work as a backup solution, too.</li>
-						</ul>
-					</section>
+            <section>
+                <h3><span class="flash-good">Coherent</span>: use Version Control</h3>
+                <ul>
+                    <li>Offers a complete solution for managing file changes over time.</li>
+                    <li>All file types are supported; can handle documents and complex coding projects alike.</li>
+                    <li>Almost any change is completely reversible.</li>
+                    <li>Makes possible efficient collaboration on projects.</li>
+                    <li>Can work as a backup solution, too.</li>
+                </ul>
+            </section>
 
-					<section style="font-size: 0.85em" data-transition="slide-in fade-out">
-						<h3>Centralized version control</h3>
-						<div class="container">
-							<div class="col">
-								<ul>
-									<li>One central repository.</li>
-									<li>All users commit changes to the central repository.</li>
-									<li>Each user has a working copy. The repository gets updated when they commit.</li>
-									<li>Examples: Subversion (SVN), CVS, Helix Core (Perforce).</li>
-								</ul>
+            <section style="font-size: 0.85em" data-transition="slide-in fade-out">
+                <h3>Centralized version control</h3>
+                <div class="container">
+                    <div class="col">
+                        <ul>
+                            <li>One central repository.</li>
+                            <li>All users commit changes to the central repository.</li>
+                            <li>Each user has a working copy. The repository gets updated when they commit.</li>
+                            <li>Examples: Subversion (SVN), CVS, Helix Core (Perforce).</li>
+                        </ul>
 
-							</div>
-							<div class="col">
-								<img class="plain" src="img/vcs_centralized.svg">
-							</div>
-						</div>
-					</section>
+                    </div>
+                    <div class="col">
+                        <img class="plain" src="img/vcs_centralized.svg">
+                    </div>
+                </div>
+            </section>
 
-					<section style="font-size: 0.8em" data-transition="fade-in">
-						<h3>Decentralized version control</h3>
-						<div class="container">
-							<div class="col">
-								<ul>
-									<li>Multiple clones of a repository.</li>
-									<li>All users commit changes to a private repository.</li>
-									<li>All changes remain local until pushed to another repository.</li>
-									<li>No external changes are visible unless pulled from elsewhere.</li>
-									<li>An example of a decentralized version control system is...</li>
-								</ul>
+            <section style="font-size: 0.8em" data-transition="fade-in">
+                <h3>Decentralized version control</h3>
+                <div class="container">
+                    <div class="col">
+                        <ul>
+                            <li>Multiple clones of a repository.</li>
+                            <li>All users commit changes to a private repository.</li>
+                            <li>All changes remain local until pushed to another repository.</li>
+                            <li>No external changes are visible unless pulled from elsewhere.</li>
+                            <li>An example of a decentralized version control system is...</li>
+                        </ul>
 
-							</div>
-							<div class="col">
-								<img class="plain" src="img/vcs_decentralized.svg">
-							</div>
-						</div>
-					</section>
+                    </div>
+                    <div class="col">
+                        <img class="plain" src="img/vcs_decentralized.svg">
+                    </div>
+                </div>
+            </section>
 
-				</section>
+        </section>
 
-				<section>
-					<h3>Git</h3>
-				</section>
+        <section>
+            <h3>Git</h3>
+        </section>
 
-				<section>
+        <section>
 
-					<section style="font-size: 0.85em;">
-						<h3>Git facts</h3>
-						<ul style="margin-top: 25px;">
-							<li>Git was created by Linus Torvalds in 2005.</li>
-							<li>It was designed to do version control on Linux kernel.</li>
-							<li>It is free, open source software.</li>
-							<li>Goals of Git are speed, support for nonlinear development, and ability to handle large projects efficiently.</li>
-						</ul>
+            <section style="font-size: 0.85em;">
+                <h3>Git facts</h3>
+                <ul style="margin-top: 25px;">
+                    <li>Git was created by Linus Torvalds in 2005.</li>
+                    <li>It was designed to do version control on Linux kernel.</li>
+                    <li>It is free, open source software.</li>
+                    <li>Goals of Git are speed, support for nonlinear development, and ability to handle large projects
+                        efficiently.
+                    </li>
+                </ul>
 
-						<div style="background: url('img/git.png'); position: relative; float: right; width:200px; height: 200px;"></div>
-						<p class="left" style="margin-top:50px;">“Hello, my name is Linus Torvalds and I pronounce <strong>svn</strong> as <strong>git</strong>.” <span style="color: #888;">(not an actual quote)</span></p>
+                <div style="background: url('img/git.png'); position: relative; float: right; width:200px; height: 200px;"></div>
+                <p class="left" style="margin-top:50px;">“Hello, my name is Linus Torvalds and I pronounce
+                    <strong>svn</strong> as <strong>git</strong>.” <span
+                            style="color: #888;">(not an actual quote)</span></p>
 
-					</section>
+            </section>
 
-					<section style="font-size: 0.85em;">
-						<h3>Subversion versus Git</h3>
-						<p class="left">Subversion tracks version data on each individual file.</p>
-						<p class="left">Git, on the other hand, keeps “snapshots” of the entire state of the project:</p>
-						<ul>
-							<li>Each checkin version of the code has a copy of each file in it.</li>
-							<li>Some files change on the given checkin, some do not.</li>
-							<li>For files that do not change, Git does not store them again, the new snapshot just contains links to previous files.</li>
-							<li>This redundant mechanism improves the speed of operation.</li>
-						</ul>
-					</section>
+            <section style="font-size: 0.85em;">
+                <h3>Subversion versus Git</h3>
+                <p class="left">Subversion tracks version data on each individual file.</p>
+                <p class="left">Git, on the other hand, keeps “snapshots” of the entire state of the project:</p>
+                <ul>
+                    <li>Each checkin version of the code has a copy of each file in it.</li>
+                    <li>Some files change on the given checkin, some do not.</li>
+                    <li>For files that do not change, Git does not store them again, the new snapshot just contains
+                        links to previous files.
+                    </li>
+                    <li>This redundant mechanism improves the speed of operation.</li>
+                </ul>
+            </section>
 
-					<section style="font-size: 0.8em;" data-transition="slide-in fade-out">
-						<h3>Subversion timeline</h3>
-						<img class="plain" src="img/checkins_svn.svg">
-					</section>
+            <section style="font-size: 0.8em;" data-transition="slide-in fade-out">
+                <h3>Subversion timeline</h3>
+                <img class="plain" src="img/checkins_svn.svg">
+            </section>
 
-					<section style="font-size: 0.8em;" data-transition="fade-in slide-out">
-						<h3>Git timeline</h3>
-						<img class="plain" src="img/checkins_git.svg">
-					</section>
+            <section style="font-size: 0.8em;" data-transition="fade-in slide-out">
+                <h3>Git timeline</h3>
+                <img class="plain" src="img/checkins_git.svg">
+            </section>
 
-				</section>
+        </section>
 
-				<section>
-					<h3>Let's get our feet wet!</h3>
-				</section>
+        <section>
+            <h3>Let's get our feet wet!</h3>
+        </section>
 
-				<section>
+        <section>
 
-					<section style="font-size: 0.7em;">
-						<h3>Identity: who is going to commit?</h3>
-						<p class="left">After firing up the terminal (or Git bash on Windows), assuming this is your first “Git session”, you need to provide Git your identity. Otherwise, you will not be allowed to commit.</p>
-						<p class="left">To do this, run the following two lines in the terminal replacing relevant parts with your details:</p>
-						<pre><code class="hljs" style="font-size: 1.5em; padding: 20px;">git config --global user.name "Your Name"
+            <section style="font-size: 0.7em;">
+                <h3>Identity: who is going to commit?</h3>
+                <p class="left">After firing up the terminal (or Git bash on Windows), assuming this is your first “Git
+                    session”, you need to provide Git your identity. Otherwise, you will not be allowed to commit.</p>
+                <p class="left">To do this, run the following two lines in the terminal replacing relevant parts with
+                    your details:</p>
+                <pre class="bash"><code class="hljs git">git config --global user.name "Your Name"
 
 git config --global user.email "example@example.com"</code></pre>
 
-						<p class="left">To use a separate identity in each project, just omit the <code>--global</code> option when your current directory is inside the relevant repository.</p>
+                <p class="left">To use a separate identity in each project, just omit the <code>--global</code> option
+                    when your current directory is inside the relevant repository.</p>
 
-						<p class="left">You can also check your identity by omitting the strings at the end.</p>
+                <p class="left">You can also check your identity by omitting the strings at the end.</p>
 
-					</section>
+            </section>
 
-					<section data-state="terminal-01">
-						<h5>Set up the identity</h5>
-						<div data-is-terminal data-dir="~"></div>
-					</section>
+            <section data-state="terminal-01">
+                <h5>Git: Set up the identity</h5>
+                <div data-is-terminal data-dir="~"></div>
+            </section>
 
-				</section>
+        </section>
+
+        <section>
+            <section style="font-size: 0.7em;">
+                <h3>How to set up a repository</h3>
+                <p class="left">You have two options to set up a Git repository:</p>
+                <ul>
+                    <li>Set up an <strong>empty</strong> repository. In the terminal, <code>cd</code> to an empty folder
+                        and type: <code class="hljs git">git init</code></li>
+                    <li>Clone an <strong>existing</strong> repository. The command <code class="hljs git">git clone
+                        URL</code> will accomplish that, where <code>URL</code> points to the location of the
+                        repository.
+                    </li>
+                </ul>
+                <p class="left">We will clone a specific public repository to mess around with using<code
+                        class="hljs git">git clone https://github.com/extall/helpgit.git</code></p>
+            </section>
+
+            <section data-state="terminal-02">
+                <h5>Git: Clone a repository</h5>
+                <div data-is-terminal data-dir="~"></div>
+            </section>
+
+            <section style="font-size:0.9em">
+                <h3>Congratulations!</h3>
+                <p class="left">If everything completed successfully, then you have just cloned your first Git
+                    repository.</p>
+                <p class="left">Now <code>cd</code> into its folder and type <code class="hljs git">git status</code> to
+                    check
+                    the status of the working tree.</p>
+                <p class="left">Before proceeding, we now need to learn a few things about Git terminology and the way
+                    Git versioning process works.</p>
+            </section>
+        </section>
+
+        <section>
+            <section style="font-size:0.7em">
+                <h3>Git terminology</h3>
+                <table>
+                    <tr>
+                        <th>Term</th>
+                        <th>Meaning</th>
+                    </tr>
+                    <tr>
+                        <td>index</td>
+                        <td> staging area (located in .git/index)</td>
+                    </tr>
+                    <tr>
+                        <td>content</td>
+                        <td> git tracks what is in a file, not the file itself</td>
+                    </tr>
+                    <tr>
+                        <td>tree</td>
+                        <td> git's representation of a file system</td>
+                    </tr>
+                    <tr>
+                        <td>working tree</td>
+                        <td> tree representing what is currently checked out</td>
+                    </tr>
+                    <tr>
+                        <td>staged</td>
+                        <td> ready to be committed</td>
+                    </tr>
+                    <tr>
+                        <td>commit</td>
+                        <td> a set of database entries (snapshot of the working tree)</td>
+                    </tr>
+                    <tr>
+                        <td>ref</td>
+                        <td> pointer to a commit object</td>
+                    </tr>
+                    <tr>
+                        <td>branch</td>
+                        <td> just a (special) ref; semantically represents a line of dev</td>
+                    </tr>
+                    <tr>
+                        <td>HEAD</td>
+                        <td> a ref pointing to the working tree</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section style="font-size:0.9em">
+                <h3>Local and remote operations</h3>
+                <p class="left">In your local copy, files can be</p>
+                <ul>
+                    <li>in your local repo (committed), or</li>
+                    <li>checked out and modified (working copy), or</li>
+                    <li>staged for commit (in staging area).</li>
+                </ul>
+                <p class="left">Commit history with all the version changes can be pushed to, or pulled from the
+                    remote.</p>
+                <p class="left">The difference between <code>fetch</code> and <code>pull</code> is that the latter
+                    automatically merges remote changes with local repo which then immediately end up in your working
+                    directory.</p>
+            </section>
+
+            <section style="font-size:0.7em">
+                <h3>Local and remote operations: illustration</h3>
+                <img class="plain" src="img/git_local_remote_operations.svg" style="width: 700px;">
+
+            </section>
+
+            <section style="font-size:0.85em">
+                <h3>Basic workflow</h3>
+                <p class="left">The basic workflow then working on a project with Git is:</p>
+                <ul>
+                    <li>Add files you want tracked by Git;</li>
+                    <li>Modify files in your working directory;</li>
+                    <li>Stage files which you want to commit;</li>
+                    <li>Commit changes, i.e., create a new snapshot of your repo;</li>
+                    <li>Push the changes to remote; if you are collaborator, but not owner of the remote, a pull request
+                        (PR) is created.
+                    </li>
+                </ul>
+
+            </section>
+
+            <section style="font-size:0.8em">
+                <h3>File status lifecycle illustrated</h3>
+                <img class="plain" src="img/file_status_lifecycle.svg" style="width:700px;">
+            </section>
+
+        </section>
+
+        <section>
+            <h3>Alright, let's play with some files!</h3>
+        </section>
 
 
-				<section data-state="terminal-02">
-					<h5>Another terminal! Will it work</h5>
-					<div data-is-terminal data-dir="~"></div>
-				</section>
+        <section>
 
-				<section style="font-size: 0.85em;">
-					<h3>Acknowledgements</h3>
-					<p class="left">This interactive presentation is based on</p>
-					<ul>
-						<li>The materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software Engineering course</a> read in University of Washington by René Just</li>
-						<li>The official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</li>
-					</ul>
-					<p class="left">The development of this presentation was partially supported by a teaching grant awarded to Aleksei Tepljakov in 2019.</p>
-				</section>
+            <section style="font-size:0.7em">
+                <h3>Git create and/or modify a file</h3>
+                <p class="left">Let us create a folder, and in it a file. We then add the file to the repository and
+                    commit. Run the following code (Windows) replacing <code>YEAR</code>, <code>MONTH</code>, and <code>DAY</code>
+                    as needed:</p>
+                <pre class="bash"><code class="hljs git">md pg_YEAR_MONTH_DAY
 
-				<section>
-					<h3>Thank you for your attention!</h3>
-				</section>
-				
-			</div>
-		</div>
+cd pg_YEAR_MONTH_DAY
 
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script> -->
-		<script src="js/reveal.js"></script>
+echo Hello, World! > new_file.txt</code></pre>
+                <p class="left">Now type <code>git status</code>. What do you see? Now add/stage the file with</p>
+                <pre class="bash"><code class="hljs git">git add new_file.txt</code></pre>
+            </section>
 
-		<script defe="true">
-		
-			var initialisedTerminals = {};
-		
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				hash: true,
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/highlight/highlight.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'node_modules/xterm/dist/xterm.js', async: true, callback: function() {
+            <section data-state="terminal-03">
+                <h5>Git: Create a new file, stage it, and commit it!</h5>
+                <div data-is-terminal data-dir="~"></div>
+            </section>
+
+            <section style="font-size:0.7em">
+                <h3>Committing a file to the local repository</h3>
+                <p class="left">Type <code>git status</code> again. The file should be staged for commit. So we are now ready to commit our file to the local repo. To do this:</p>
+                <pre class="bash"><code class="hljs git">git commit -m "A new file has been added."</code></pre>
+                <p class="left">Note the <code>-m</code> switch and the text in quotation marks that follows. This is known as the <strong>commit message</strong>:
+                <ul>
+                <li>You are not allowed to commit your changes without it.</li>
+                <li>This makes it easier for your collaborators to understand the changes.</li>
+                <li>Keep commit messages clear and concise!</li>
+                </ul>
+            </section>
+
+        </section>
+
+        <section>
+            <h3>TODO</h3>
+            <p class="left">
+                - You can add files using wildcards. E.g.: git add * or git add *.cpp *.h
+                - the repo folder can be freely moved around the filesystem
+                - the repo folder contains a hidden .git folder. the user need not ever touch it!
+            </p>
+        </section>
+
+        <section style="font-size: 0.85em;">
+            <h3>Acknowledgements</h3>
+            <p class="left">This interactive presentation is based on</p>
+            <ul>
+                <li>The materials from the <a href="https://homes.cs.washington.edu/~rjust/courses/2020Spring/CSE403">Software
+                    Engineering course</a> read in University of Washington by René Just
+                </li>
+                <li>The official <a href="https://git-scm.com/book/en/v2">Git Book</a>.</li>
+            </ul>
+            <p class="left">The development of this presentation was partially supported by a teaching grant awarded to
+                Aleksei Tepljakov in 2019.</p>
+        </section>
+
+        <section>
+            <h3>Thank you for your attention!</h3>
+        </section>
+
+    </div>
+</div>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script> -->
+<script src="js/reveal.js"></script>
+
+<script defer="true">
+
+    var initialisedTerminals = {};
+
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        hash: true,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/highlight/highlight.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'node_modules/xterm/dist/xterm.js', async: true, callback: function () {
                     Terminal.applyAddon(attach);
                     Terminal.applyAddon(fit);
                     var endpoint = `${location.hostname}:${location.port}`;
 
                     var terminalUrl = `//${endpoint}/terminal`;
                     var terminalSections = document.querySelectorAll('section[data-state^="terminal"]');
-                    terminalSections.forEach(function(section) {
+                    terminalSections.forEach(function (section) {
                         var slideId = section.getAttribute('data-state');
-                        var initTerminal = function() {
+                        var initTerminal = function () {
 
                             var terminalElement = section.querySelector('*[data-is-terminal]');
 
@@ -371,7 +599,7 @@ git config --global user.email "example@example.com"</code></pre>
                             }
 
                             var desiredDir = terminalElement.getAttribute('data-dir') || '';
-                            var updateTerminal = function(dir) {
+                            var updateTerminal = function (dir) {
                                 console.log(location.pathname)
                                 return fetch(terminalUrl, {
                                     method: 'POST',
@@ -401,7 +629,7 @@ git config --global user.email "example@example.com"</code></pre>
                                 'fontSize': 20
                             });
 
-                            terminal.on('resize', function(size) {
+                            terminal.on('resize', function (size) {
                                 var cols = size.cols,
                                     rows = size.rows,
                                     url = terminalUrl + '/size?cols=' + cols + '&rows=' + rows;
@@ -412,18 +640,18 @@ git config --global user.email "example@example.com"</code></pre>
                             terminal.fit();
                             Reveal.layout();
                             updateTerminal(desiredDir)
-                            .then(function () {
-                                var socket = new WebSocket(`ws://${terminalUrl}`);
-                                socket.onopen = function() {
-                                    terminal.attach(socket);
-                                    terminal._initialized = true;
-                                    terminal.fit();
-                                    Reveal.layout();
-                                };
-                            });
+                                .then(function () {
+                                    var socket = new WebSocket(`ws://${terminalUrl}`);
+                                    socket.onopen = function () {
+                                        terminal.attach(socket);
+                                        terminal._initialized = true;
+                                        terminal.fit();
+                                        Reveal.layout();
+                                    };
+                                });
                         };
-                        var setListener = function() {
-                            Reveal.addEventListener(slideId, function() {
+                        var setListener = function () {
+                            Reveal.addEventListener(slideId, function () {
                                 setTimeout(initTerminal, 100); // Give some time to load the terminal
                             }, false);
                         };
@@ -433,15 +661,17 @@ git config --global user.email "example@example.com"</code></pre>
                         }
                         setListener()
                     });
-                } }
-				]
-			});
-		</script>
-		<script>
-        // LiveReload Updates (hardcoded).
-        document.write('<script src="http://' + location.hostname +
+                }
+            }
+        ]
+    });
+</script>
+<script>
+    // LiveReload Updates (hardcoded).
+    document.write('<script src="http://' + location.hostname +
         ':35729/livereload.js?snipver=1"></' +
         'script>');
-    </script>
-	</body>
+</script>
+
+</body>
 </html>
