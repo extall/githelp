@@ -546,12 +546,65 @@ echo Hello, World! > new_file.txt</code></pre>
                 <li>You can add files faster using wildcards. For example, to add all files use <code>git add *</code> and to add all text files <code>git add *.txt</code></li>
                 <li>The repo folder can be <span class="flash-good">freely moved</span> around the filesystem.</li>
                 <li>The repo root contains a hidden <code>.git</code> folder. <span class="flash-bad">DON'T TOUCH IT</span>.</li>
-                <li>Git keeps track of and commit objects by creating SHA-1 hashes.</li>
+                <li>Git does not track empty folders, so all such folders are ignored.</li>
+                <li>To track a folder, you can put an empty file inside itf.</li>
+                <li>Git keeps track of everything by managing SHA-1 hashes.</li>
                 <li>You can access various commits using <code>git checkout HASH</code>.</li>
             </ul>
 
             <p class="left">Next, we will discuss <strong>merge conflicts</strong> and <strong>branches</strong>.</p>
         </section>
+
+        <section>
+
+
+            <section style="font-size:0.7em">
+                <h3>Creating a merge conflict</h3>
+                <p class="left">Let us now create a merge conflict. This requires a more advanced setup, so bear with me. Go to the repo's parent folder and run the following command:</p>
+                <pre class="bash"><code class="hljs git">git clone https://github.com/extall/helpgit.git helpgit1</code></pre>
+                <p class="left">If you've followed previous instructions, you should now have to folders side by side: <code>helpgit</code> and <code>helpgit1</code>. We will make it so that the latter one will be able to pull changes from the former one (both are local!). To do this, <code>cd</code> into <code>helpgit1</code> and type</p>
+                <pre class="bash"><code class="hljs git">git remote add local ../helpgit</code></pre>
+                <p class="left">Now you can use <code>git pull local</code> to pull from <code>helpgit</code> to <code>helpgit1</code>!</p>
+            </section>
+
+            <section data-state="terminal-04">
+                <h5>Git: Create a merge conflict</h5>
+                <div data-is-terminal data-dir="~"></div>
+            </section>
+
+            <section style="font-size:0.7em">
+                <h3>Creating the same (but slightly different) file</h3>
+                <p class="left">The task now is a bit tedious. Please follow the instructions exactly.</p>
+                <ul>
+                    <li>Create a file with the same name in both repos (different content):<br />In <code>helpgit</code>:
+                        <pre class="bash"><code class="hljs git">echo Hello, World! > test_YEAR_MONTH_DAY.txt</code></pre>
+                        In <code>helpgit1</code>:
+                        <pre class="bash"><code class="hljs git">echo Hello World! > test_YEAR_MONTH_DAY.txt</code></pre>
+                    </li>
+                    <li>In both repos, run
+                        <pre class="text"><code class="hljs git">git add *
+
+git commit -m "Added new file"</code></pre>
+                    </li>
+                </ul>
+            </section>
+
+            <section style="font-size:0.7em">
+                <h3>Trying to pull from the local repo</h3>
+                <p class="left">Now, <code>cd</code> to <code>helpgit1</code> and attempt to pull from <code>helpgit</code> into the currently checked out <code>master</code> branch (we will discuss branches later):</p>
+                <pre class="text"><code class="hljs git">git pull local master</code></pre>
+                <p class="left">As a result, you should see something like this:</p>
+                <pre class="text"><code class="hljs git" style="font-size: 1.4em;">CONFLICT (add/add): Merge conflict in test_YEAR_MONTH_DAY.txt
+
+Auto-merging test_YEAR_MONTH_DAY.txt
+
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+                <p class="left">Congratulations on receiving your first ever merge conflict! Let us fix it now.</p>
+            </section>
+
+
+        </section>
+
 
         <section style="font-size: 0.85em;">
             <h3>Acknowledgements</h3>
