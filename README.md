@@ -1,9 +1,5 @@
 # Git Help
-This repository hosts an evolving `reveal.js` presentation about using Git that makes use of a `node.js`-based server with `node-pty` as backend and `xterm.js` as frontend for a terminal used in the interactive demonstrations.
-
-## Security Alert and Disclaimer
-
-ONLY USE THIS APPLICATION IF YOU ARE AWARE OF THE SECURITY RISKS. YOUR PRESENTATION AND HENCE THE TERMINALS MAY POTENTIALLY BE ACCESSED BY OTHER COMPUTERS ON THE NETWORK. THE PERSON ACCESSING YOUR PRESENTATION WILL HAVE FULL, UNLIMITED CONTROL OF YOUR MACHINE THROUGH THE TERMINAL. THE AUTHOR OF THIS APPLICATION MAY NOT BE HELD RESPONSIBLE FOR  DAMAGES ARISING FROM USING OR MISUSING THE APPLICATION.
+This repository hosts a `reveal.js` presentation about using Git that makes use of a `node.js`-based server with `node-pty` as backend and `xterm.js` as frontend for a terminal used in the interactive demonstrations.
 
 ## Acknowledgements
 
@@ -13,7 +9,7 @@ The presentation framework is the excellent [reveal.js](https://revealjs.com/) b
 
 ## How to
 
-Install the required node modules by running in the directory containing `server.js`
+Install the required node modules by running in the directory containing `server.js`, i.e., the root directory:
 
 `npm install`
 
@@ -25,4 +21,8 @@ After this, navigate to `localhost:8000` in your browser of choice.
 
 ## Notes
 
-Only tested on Windows at the moment.
+Only tested on Windows at the moment. Should also work on Linux, but the commands will be slightly different. As a simple example, when `echo`ing, you need to enclose the string into quoation marks, i.e., do like `echo "Hello, World!" > test.txt`. If you do this on Windows terminal, the quotation marks are stored in the text file also.
+
+## Security Alert and Disclaimer
+
+ONLY USE THIS APPLICATION IF YOU ARE AWARE OF THE SECURITY RISKS. YOUR PRESENTATION AND HENCE THE TERMINALS MAY POTENTIALLY BE ACCESSED BY OTHER COMPUTERS ON THE NETWORK. THE PERSON ACCESSING YOUR PRESENTATION WILL HAVE FULL, UNLIMITED CONTROL OF YOUR MACHINE THROUGH THE TERMINAL. THE AUTHOR OF THIS APPLICATION MAY NOT BE HELD RESPONSIBLE FOR  DAMAGES ARISING FROM USING OR MISUSING THE APPLICATION.
