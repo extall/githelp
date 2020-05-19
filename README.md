@@ -9,7 +9,7 @@ The presentation framework is the excellent [reveal.js](https://revealjs.com/) b
 
 ## How to
 
-Install the required node modules by running in the directory containing `server.js`, i.e., the root directory:
+Download this repo from GitHub in a zip folder and unpack the presentation and all the files. Install latest Node.js LTS. Finally, install the required node modules by running in the directory containing `server.js`, i.e., the root directory:
 
 `npm install`
 
