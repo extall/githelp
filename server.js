@@ -29,10 +29,22 @@ app.use(bodyParser.urlencoded({
   }))
 
 // Serve all content from the root.
-app.use(serveStatic(__dirname, {'cacheControl': false}));
+app.use(serveStatic(__dirname, {'cacheControl': false, 'index': false}));
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+	
+	// Read the presentation file
+	fs.readFile(__dirname + "/index.html", "utf8", function(err, data){
+		if (err) throw err;
+		
+		// Replace YEAR_MONTH_DAY everywhere it is encountered
+		var date = new Date().toISOString().substr(0, 10).replace(/\-/g, "_");
+		
+		var data_repd = data.replace(/YEAR_MONTH_DAY/g, date);
+		
+		// Send the updated data
+		res.send(data_repd);
+	});
 });
 
 var getDesiredDir = function(req) {
