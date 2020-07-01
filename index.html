@@ -545,6 +545,28 @@ echo Hello, World! > new_file.txt</code></pre>
         </section>
 
         <section>
+            <section style="font-size: 0.8em">
+                <h3>Issues after pull? Whodunit? Read the log!</h3>
+                <p class="left">In order to see the commit log, use the following command:</p>
+                <pre class="text"><code class="hljs git">git log</code></pre>
+                <p class="left">To see only <code>N</code> last commits, use the <code>-n N</code> switch. For example, to see the last three commits, use</p>
+                <pre class="text"><code class="hljs git">git log -n 3</code></pre>
+            </section>
+
+            <section style="font-size: 0.8em;">
+                <h3>Undoing and reverting changes</h3>
+                <p class="left">To undo changes on a file before committing:</p>
+                <pre class="text"><code class="hljs git">git reset HEAD -- filename
+
+git checkout -- filename</code></pre>
+                <p class="left">To undo the last commit (keeping changes in index):</p>
+                <pre class="text"><code class="hljs git">git reset --soft HEAD~1</code></pre>
+                <p class="left">To undo the last commit destroying the changes:</p>
+                <pre class="text"><code class="hljs git">git reset --hard HEAD~1</code></pre>
+            </section>
+        </section>
+
+        <section>
             <section style="font-size: 0.8em;">
                 <h3>More Git basics</h3>
                 <p class="left">By this time you should have learned the most simple Git workflow. Here are some useful bits of information.</p>
@@ -559,24 +581,9 @@ echo Hello, World! > new_file.txt</code></pre>
                 </ul>
 
             </section>
-
-            <section style="font-size: 0.8em;">
-                <h3>And a few more (destructive) ones</h3>
-                <p class="left">To undo changes on a file before committing:</p>
-                <pre class="text"><code class="hljs git">git reset HEAD -- filename
-
-git checkout -- filename</code></pre>
-                <p class="left">To undo the last commit (keeping changes in index):</p>
-                <pre class="text"><code class="hljs git">git reset --soft HEAD~1</code></pre>
-                <p class="left">To undo the last commit destroying the changes:</p>
-                <pre class="text"><code class="hljs git">git reset --hard HEAD~1</code></pre>
-            </section>
         </section>
 
-
-
         <section>
-
 
             <section style="font-size:0.7em">
                 <h3>Creating a merge conflict</h3>
@@ -595,7 +602,7 @@ git checkout -- filename</code></pre>
             <section style="font-size:0.65em">
                 <h3>Creating the same (but slightly different) file</h3>
                 <p class="left">The task now is a bit tedious. But please follow the instructions <span class="flash-01">exactly</span>.<br />Create a file with the same name in both repos (but different content)—</p>
-                <p class="left">In <code>helpgit</code> (don't forget to replace <code>YEAR</code>, <code>MONTH</code>, and <code>DATE</code>):</p>
+                <p class="left">In <code>helpgit</code> (don't forget to replace <code>YEAR</code>, <code>MONTH</code>, and <code>DATE</code> if needed):</p>
                 <pre class="text"><code class="hljs git">echo Hello, World! > test_YEAR_MONTH_DAY.txt</code></pre>
                 <p class="left">In <code>helpgit1</code> (replace the date info here too, of course):</p>
                 <pre class="text"><code class="hljs git">echo Hello World! > test_YEAR_MONTH_DAY.txt</code></pre>
@@ -618,7 +625,7 @@ Automatic merge failed; fix conflicts and then commit the result.</code></pre>
                 <p class="left">Congratulations on receiving your first ever merge conflict! Let's fix it now.</p>
             </section>
 
-            <section style="font-size:0.7em">
+            <section style="font-size:0.69em">
                 <h3>See the conflict</h3>
                 <p class="left">To see what constitutes the conflict, see how the text file looks now:</p>
                 <pre class="text"><code class="hljs git">more test_YEAR_MONTH_DAY.txt</code></pre>
@@ -632,7 +639,7 @@ Hello World!
 Hello, World!
 
 >>>>>>> dc2c23318eaea06625a28c94bf418daf80c35cdd</code></pre>
-                <p class="left">How to read this: first line is what we have, second line is what ‘they’ have.</p>
+                <p class="left">The first ‘hello world’ line is what we have, the second one is what ‘they’ have.</p>
             </section>
 
             <section data-state="terminal-05">
@@ -642,11 +649,11 @@ Hello, World!
 
             <section style="font-size:0.7em">
                 <h3>Fix the conflict</h3>
-                <p class="left">To fix the conflict, we could just replace the contents of the file, since it only has one line. We'll keep the gramatically correct version:</p>
+                <p class="left">To fix the conflict, we could just replace the contents of the file, since it only has one line. We'll keep the orthographically correct version:</p>
                 <pre class="text"><code class="hljs git">echo Hello, World! > test_YEAR_MONTH_DAY.txt</code></pre>
-                <p class="left">In general, you want to eliminate the lines with conflict markers <code><<<<<<<</code>, <code>=======</code>, and <code>>>>>>>></code>, and choosing the <strong>content line</strong> you want to keep. You need to do this for every conflict in the file.</p>
-                <p class="left">After the conflicts are solved, you need to create a <strong>merge commit</strong>. So stage the file using <code>git add</code> and commit it with <code>git commit -m "Message"</code>.</p>
-                <p class="left">After every operation, check <code>git status</code> to see how it all fits together.</p>
+                <p class="left">In general, you want to eliminate the lines with conflict markers <code><<<<<<<</code>, <code>=======</code>, and <code>>>>>>>></code>, while choosing the <strong>content line</strong> you want to keep. You need to do this for every conflict in the file.</p>
+                <p class="left">After the conflicts are resolved, you need to create a <strong>merge commit</strong>. So stage the file using <code>git add</code> and commit it with <code>git commit -m "Message"</code>.</p>
+                <p class="left">After every operation, check <code>git status</code> to see how it all sits together.</p>
             </section>
 
             <section style="font-size:0.7em;">
@@ -702,16 +709,36 @@ Hello, World!
                 <p class="left" style="color: #888;"><small><sup>*</sup>Also known as the sixth and final terminal.</small></p>
             </section>
 
+            <section style="font-size: 0.70em">
+                <h3>Tracking branches</h3>
+                <p class="left">By default, Git will allow branches with the same name to coexist completely <strong>independently</strong> in two interacting repositories. However, in case of copy/origin transactions, this is suboptimal. So in order to ensure proper synchronization between the two, one must turn to <strong>tracking references</strong>.</p>
+                <p class="left">So, to track a branch <code>devel</code> on the origin:</p>
+                <pre class="text"><code class="hljs git">git checkout --track origin/devel</code></pre>
+                <p class="left">And, conversly, to add a tracking reference on the origin to a given local branch, say, <code>featurex</code>, one could say:</p>
+                <pre class="text"><code class="hljs git">git push -u origin featurex</code></pre>
+            </section>
+
+            <section style="font-size: 0.69em;">
+                <h3>Two-way merge</h3>
+                <p class="left">It is important to remember that when switching to a different branch, say <code>devel</code>, which is behind the <code>master</code> branch, you need to merge the master branch into it, to make use of the latest updates in <code>master</code>, i.e., you need to synchronize those branches. But only if this is your way of working with Git.</p>
+                <p class="left">So the typical sequence of operations is</p>
+                <ol class="left">
+                    <li>From <code>devel</code> branch switch to <code>master</code> and merge.</li>
+                    <li>Maybe do some work on <code>master</code> directly, or merge other branches into it.</li>
+                    <li>Coming back to <code>devel</code> branch, merge <code>master</code> into it and continue developing on it.</li>
+                </ol>
+            </section>
+
         </section>
 
         <section>
 
             <section data-background="img/Employee427Room.jpg" data-state="hide-down">
                 <h4>You are good at following instructions!<br />
-                Now, click “left” to go to the last slides...</h4>
+                Now, click “right” to go to the last slides...</h4>
             </section>
 
-            <section data-state="terminal-07">
+            <section data-background="img/Employee427Room.jpg" data-state="terminal-07">
                 <h5>Didn't I tell you to go to the last slides?</h5>
                 <p style="font-size:0.8em;">Oh well... You get another terminal as your reward. Enjoy!</p>
                 <div data-is-terminal data-dir="~" style="margin-top: 1em;"></div>
@@ -730,12 +757,15 @@ Hello, World!
                 <h3>What to read about next</h3>
                 <ul>
                     <li>Navigating the Git branch and <strong>tagging</strong> commits;</li>
-                    <li><strong>Checking out</strong> or <strong>cherry picking</strong> commits;</li>
-                    <li><strong>Stashing</strong> and merging stashes;</li>
+                    <li>Checking out or cherry picking commits;</li>
+                    <li>Stashing and merging stashes;</li>
+                    <li>Using “central” “origin” servers like GitHub.com;</li>
+                    <li>Submodules (repositories within repositories);</li>
+                    <li>Using graphical user interfaces like Git-Extensions;</li>
                     <li>What <code>git rebase</code> does;</li>
                     <li>Why as a beginner you should not <code>git rebase</code>;</li>
-                    <li>Using “central” “origin” servers like GitHub.com;</li>
-                    <li>Using graphical user interfaces like Git-Extensions.</li>
+                    <li>About <code>git clean</code>, <code>git revert</code>, and <code>git rm</code>.</li>
+
                 </ul>
             </section>
 
